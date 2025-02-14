@@ -1,11 +1,9 @@
-﻿#include "string_utils.h"
-
-#include "Recreate_Standard_Functions.h"
-
-using namespace std;
+#include "string_utils.h"
 
 int main()
 {
-	cout << "Hello CMake." << endl;
-	return 0;
+	char*  p;
+	p = chardup('X');
+	puts(p);
+
 }
