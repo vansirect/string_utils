@@ -33,6 +33,32 @@ int print_str(char* str) {
         write(1, str++, 1);
     }
 }
+int print_char(char c) {
+    write(1, &c, 1);
+    return 1;
+} 
+int print_num(int num) {
+    char buf[20];
+    int i = 0;
+    if (num == 0) {
+        write(1, "0", 1);
+        return 1;
+    }
+    if (num < 0) {
+        write(1, "-", 1);
+        num = -num;
+    }
+    while (num > 0) {
+        buf[i++] = (num % 10) + '0';
+        num /= 10;
+    }
+    while (i > 0) {
+        write(1, &buf[--i], 1);
+    }
+    return i;
+}
+
+
 
 int my_printf(const char* format, ...) {
     const char * p;
@@ -45,6 +71,17 @@ int my_printf(const char* format, ...) {
             temp += print_str(str);
             p += 2;
         }
+        else if (*p == '%' && *(p + 1) == 'c') {
+            char c = va_arg(args, char);
+            temp += print_char(c);
+            p += 2;
+
+        }
+        else if (*p == '%' && *(p + 1) == 'd') {
+            int num = va_arg(args, int);
+            temp += print_num(num);
+            p += 2;
+        }
         else {
             write(1, p, 1);
             temp++;
@@ -54,5 +91,6 @@ int my_printf(const char* format, ...) {
     va_end(args); 
     return temp;
 }
+
 
 
