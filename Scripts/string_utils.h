@@ -3,12 +3,16 @@
 
 #include <unistd.h>
 #include <stdarg.h>
-int print_str(char *str)
 
+
+int print_str(char *str)
 int my_printf(const char* format,...)
 
 char* chardup(const char c);
 unsigned int strlen(const char* c);
 int puts(const char* str);
+int print_char(char c);
+int print_num(int num);
+
 
 #endif 
