@@ -57,6 +57,25 @@ int print_num(int num) {
     }
     return i;
 }
+int print_float(double num) {
+    char buf[40];
+    int i = 0;
+    if (num == 0.0) {
+        write(1, "0.0", 3);
+        return 3;
+    }
+    int int_part = (int)num;
+    num -= int_part;
+    i += write_num(int_part);
+    write(1, ".", 1);
+    for (int j = 0; j < 6; j++) {
+        num *= 10;
+        int frac_part = (int)num;
+        write(1, &"0123456789"[frac_part], 1);
+        num -= frac_part;
+    }
+    return i + 1 + 6;
+}
 
 
 
@@ -82,6 +101,12 @@ int my_printf(const char* format, ...) {
             temp += print_num(num);
             p += 2;
         }
+        else if (*p == '%' && *(p + 1) == 'f') {
+            double num = va_arg(args, double);
+            written += print_float(num);
+            p += 2;
+        }
+
         else {
             write(1, p, 1);
             temp++;
