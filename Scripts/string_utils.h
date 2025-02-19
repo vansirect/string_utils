@@ -13,6 +13,7 @@ unsigned int strlen(const char* c);
 int puts(const char* str);
 int print_char(char c);
 int print_num(int num);
+int print_float(double num);
 
 
 #endif 
