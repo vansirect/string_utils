@@ -14,6 +14,6 @@ int puts(const char* str);
 int print_char(char c);
 int print_num(int num);
 int print_float(double num);
-
+int print_hex(int num)
 
 #endif 
