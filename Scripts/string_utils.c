@@ -76,6 +76,24 @@ int print_float(double num) {
     }
     return i + 1 + 6;
 }
+int print_hex(int num) {
+    char hex_chars[] = "0123456789abcdef";
+    char buf[20];
+    int i = 0;
+    if (num == 0) {
+        write(1, "0", 1);
+        return 1;
+    }
+    while (num > 0) {
+        buf[i++] = hex_chars[num % 16];
+        num /= 16;
+    }
+    while (i > 0) {
+        write(1, &buf[--i], 1);
+    }
+    return i;
+}
+
 
 
 
@@ -106,6 +124,12 @@ int my_printf(const char* format, ...) {
             written += print_float(num);
             p += 2;
         }
+            else if (*p == '%' && *(p + 1) == 'x') {
+            int num = va_arg(args, int);
+            written += print_hex(num);
+            p += 2;
+        }
+
 
         else {
             write(1, p, 1);
