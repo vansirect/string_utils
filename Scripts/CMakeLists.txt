@@ -3,7 +3,7 @@
 #
 
 # Add source to this project's executable.
-add_executable (Recreate_Standard_Functions "Main.c" "Main.h")
+add_executable (Recreate_Standard_Functions "main.c" "string_utils.h" "string_utils.c")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Recreate_Standard_Functions PROPERTY CXX_STANDARD 20)
